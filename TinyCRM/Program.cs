@@ -45,7 +45,7 @@ namespace TinyCRM
                     }
                     else
                     {
-                        Console.WriteLine("Wrong length of AFM: Please insert again");
+                        Console.WriteLine("Please insert again");
                         return false;
                     }
                 }
