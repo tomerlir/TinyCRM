@@ -3,8 +3,10 @@ namespace TinyCRM
 {
     public class Customer
     {
+        public string CustomerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public int age { get; set; }
         public string Email { get; set; }
         public string VatNumber { get; private set; }
         public string PhoneNumber { get; set; }

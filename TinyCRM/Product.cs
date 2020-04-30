@@ -25,16 +25,16 @@ namespace TinyCRM
 
         public void ReadFile()
         {
-            string filePath = @"/Users/tomerliran/Projects/TinyCRM/TinyCRM/ProductsList.txt"; //File directory
             Random rand = new Random(); //Random number generator
-            var set = new HashSet<string>();
+            string filePath = @"/Users/tomerliran/Projects/TinyCRM/TinyCRM/ProductsList.txt"; //File directory
+            var set = new HashSet<string>(); //HashSet to save ProductId
 
             List<Product> productList = new List<Product>(); //Create new list ready to be populated
             List<string> lines = File.ReadAllLines(filePath).ToList(); //Read file and put into a list of string
 
             foreach (var line in lines)
             {
-                string[] entries = line.Split(';'); //For each line split it apart at the semicolon
+                string[] entries = line.Split(';'); //Split each line apart at the semicolon
                 Product newProduct = new Product(); //Create a new product entry based upon the split apart entries (seen below)
 
                 newProduct.ProductId = entries[0];
@@ -42,8 +42,8 @@ namespace TinyCRM
                 newProduct.Description = entries[2];
                 newProduct.Price = new decimal(Math.Round(rand.NextDouble() * 40, 3));
 
-                //Nested loop to check HashSet if ProductId already exists
-                foreach (var check in newProduct.ProductId)
+                //Nested loop to check HashSet if ProductId already exists there
+                for(int k = 0; k < lines.Count; k++)
                 {
                     if (!set.Contains(newProduct.ProductId))
                     {
@@ -52,13 +52,12 @@ namespace TinyCRM
                     }
                 }
             }
-
-            /* Check if saving properly (SUCCESS)
+            // Check if saving properly (SUCCESS)
             foreach (var product in productList)
             {
                 Console.WriteLine($"{product.ProductId} ; {product.Name} ; {product.Description} ; {product.Price}");
             }
-            */
+            //
         }
     }
 }

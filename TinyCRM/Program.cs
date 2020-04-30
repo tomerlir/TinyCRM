@@ -7,7 +7,15 @@ namespace TinyCRM
         static void Main(string[] args)
         {
             var p = new Product();
-            p.ReadFile();
+            try
+            {
+                p.ReadFile();
+            }
+            catch
+            {
+                Console.WriteLine("There was an error reading your file");
+                return;
+            }
         }
     }
 }
