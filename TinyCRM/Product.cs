@@ -17,6 +17,7 @@ namespace TinyCRM
         {
 
         }
+
         /*        HOMEWORK 29/04/2020              */
         //1. Parse the file's contents and create a list where all products can be found
         //2. Randomize Price and add to Product
@@ -26,9 +27,10 @@ namespace TinyCRM
         {
             string filePath = @"/Users/tomerliran/Projects/TinyCRM/TinyCRM/ProductsList.txt"; //File directory
             Random rand = new Random(); //Random number generator
+            var set = new HashSet<string>();
 
             List<Product> productList = new List<Product>(); //Create new list ready to be populated
-            List<string> lines = File.ReadAllLines(filePath).ToList(); //Read file and put into a list of string 
+            List<string> lines = File.ReadAllLines(filePath).ToList(); //Read file and put into a list of string
 
             foreach (var line in lines)
             {
@@ -39,29 +41,22 @@ namespace TinyCRM
                 newProduct.Name = entries[1];
                 newProduct.Description = entries[2];
                 newProduct.Price = new decimal(Math.Round(rand.NextDouble() * 40, 3));
-                productList.Add(newProduct); //Fill in Product based on added entries
 
+                //Nested loop to check HashSet if ProductId already exists
+                foreach (var check in newProduct.ProductId)
+                {
+                    if (!set.Contains(newProduct.ProductId))
+                    {
+                        productList.Add(newProduct);
+                        set.Add(newProduct.ProductId);
+                    }
+                }
             }
 
-            //System.Linq extension method. Remove duplicates considering only the ProductId of each object
-
-            /* Use for test: var result = */
-            productList.Distinct(new ItemEqualityComparer());
-
-            /* Check if removing duplicate (SUCCESS)
-            int i = 0;
-            foreach(var productId in result)
-            {
-                Console.WriteLine($"{i}. DISTINCT Products = {productId.ProductId} And {productId.Name}");
-                i++;
-            }
-            */
-            /*  Check if saving properly (SUCCESS)
-            int j = 0;
+            /* Check if saving properly (SUCCESS)
             foreach (var product in productList)
             {
-                Console.WriteLine($"Line: {j} {product.ProductId} ; {product.Name} ; {product.Description} ; {product.Price}");
-                j++;
+                Console.WriteLine($"{product.ProductId} ; {product.Name} ; {product.Description} ; {product.Price}");
             }
             */
         }
