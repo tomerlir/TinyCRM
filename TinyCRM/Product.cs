@@ -9,8 +9,9 @@ namespace TinyCRM
     {
         public string ProductId { get; private set; }
         private string Description { get; set; }
-        private string Name { get; set; }
-        private decimal Price { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public List<Product> ProductList { get; private set; } = new List<Product>(); //Create new list ready to be populated
 
         //Constructor
         public Product()
@@ -18,7 +19,7 @@ namespace TinyCRM
 
         }
 
-        /*        HOMEWORK 29/04/2020              */
+        /*        HOMEWORK OF 29/04/2020              */
         //1. Parse the file's contents and create a list where all products can be found
         //2. Randomize Price and add to Product
         //3. Ensure that only unique codes are found in the list of products. No product codes should be found twice.
@@ -29,13 +30,12 @@ namespace TinyCRM
             string filePath = @"/Users/tomerliran/Projects/TinyCRM/TinyCRM/ProductsList.txt"; //File directory
             var set = new HashSet<string>(); //HashSet to save ProductId
 
-            List<Product> productList = new List<Product>(); //Create new list ready to be populated
-            List<string> lines = File.ReadAllLines(filePath).ToList(); //Read file and put into a list of string
+            var lines = File.ReadAllLines(filePath).ToList(); //Read file and put into a list of string
 
             foreach (var line in lines)
             {
                 string[] entries = line.Split(';'); //Split each line apart at the semicolon
-                Product newProduct = new Product(); //Create a new product entry based upon the split apart entries (seen below)
+                var newProduct = new Product(); //Create a new product entry based upon the split apart entries (seen below)
 
                 newProduct.ProductId = entries[0];
                 newProduct.Name = entries[1];
@@ -43,21 +43,31 @@ namespace TinyCRM
                 newProduct.Price = new decimal(Math.Round(rand.NextDouble() * 40, 3));
 
                 //Nested loop to check HashSet if ProductId already exists there
-                for(int k = 0; k < lines.Count; k++)
+                for (int k = 0; k < lines.Count; k++)
                 {
                     if (!set.Contains(newProduct.ProductId))
                     {
-                        productList.Add(newProduct);
+                        ProductList.Add(newProduct);
                         set.Add(newProduct.ProductId);
                     }
                 }
             }
-            // Check if saving properly (SUCCESS)
-            foreach (var product in productList)
+        }
+
+        public void PrintProductList()
+        {
+            //Check if saving properly to public list (SUCCESS)
+            foreach (Product product in ProductList)
             {
                 Console.WriteLine($"{product.ProductId} ; {product.Name} ; {product.Description} ; {product.Price}");
             }
-            //
         }
+
+        public Product GetProductById(string prodId)
+        {
+            return ProductList.FirstOrDefault(Product => Product.ProductId.Equals(prodId));
+        }
+
+        //pulic Product GetProdu
     }
 }
