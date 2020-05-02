@@ -11,7 +11,7 @@ namespace TinyCRM
         private string Description { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
-        public List<Product> ProductList { get; private set; } = new List<Product>(); //Create new list ready to be populated
+        public List<Product> ProductList { get; set; } = new List<Product>(); //Create new list ready to be populated
 
         //Constructor
         public Product()
@@ -56,7 +56,6 @@ namespace TinyCRM
 
         public void PrintProductList()
         {
-            //Check if saving properly to public list (SUCCESS)
             foreach (Product product in ProductList)
             {
                 Console.WriteLine($"{product.ProductId} ; {product.Name} ; {product.Description} ; {product.Price}");
@@ -68,6 +67,10 @@ namespace TinyCRM
             return ProductList.FirstOrDefault(Product => Product.ProductId.Equals(prodId));
         }
 
-        //pulic Product GetProdu
+        public Product GetRandomProduct()
+        {
+            var random = new Random();
+            return ProductList.OrderBy(Produt => random.NextDouble()).First();
+        }
     }
 }

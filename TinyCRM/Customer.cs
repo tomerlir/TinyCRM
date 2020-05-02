@@ -103,7 +103,6 @@ namespace TinyCRM
         public void AddProductToCustomer(Customer customer, Product product)
         {
             customer.ListOfOrders.Add(product);
-
             /*Test if Product is added correctly to Customer (SUCCESS)
             Console.WriteLine($"Customer {customer.FirstName} has ordered: {product.Name}");
             */
@@ -112,6 +111,11 @@ namespace TinyCRM
         public Customer GetCustomerById(string customerId)
         {
             return CustomerList.FirstOrDefault(Customer => Customer.CustomerId.Equals(customerId));
+        }
+
+        public decimal ReturnTotalGross(Customer customer)
+        {
+            return customer.TotalGross = customer.ListOfOrders.Sum(Product => Product.Price);
         }
 
     }
