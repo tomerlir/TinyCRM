@@ -12,8 +12,6 @@ namespace TinyCrm
         {
             using (var context = new TinyCrmDbContext())
             {
-                ICustomerService customerService = new CustomerService(
-                    context);
             }
         }
     }
