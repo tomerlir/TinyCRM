@@ -1,20 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
-namespace TinyCRM
+﻿namespace TinyCrm
 {
     public class Product
     {
-        public int ProductId { get; private set; }
+        public int ProductId { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }
-        public decimal Price { get; set; }
-        public string ProductCatergory { get; set; }
-
-        public Product()
-        {
-        }
+        public decimal? Price { get; set; }
+        public ProductCategory Category { get; set; }
     }
 }

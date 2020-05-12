@@ -12,4 +12,39 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Options\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="CreateCustomerOptions.cs" />
+    <Compile Remove="SearchCustomerOptions.cs" />
+    <Compile Remove="CreateOrderOptions.cs" />
+    <Compile Remove="SearchProductOptions.cs" />
+    <Compile Remove="CreateProductOptions.cs" />
+    <Compile Remove="SearchOrderOptions.cs" />
+    <Compile Remove="ProductService.cs" />
+    <Compile Remove="IProductService.cs" />
+    <Compile Remove="OrderService.cs" />
+    <Compile Remove="IOrderService.cs" />
+    <Compile Remove="CustomerService.cs" />
+    <Compile Remove="ICustomerService.cs" />
+  </ItemGroup>
+  <!-- <ItemGroup>
+    <Compile Include="Options\CreateCustomerOptions.cs" />
+    <Compile Include="Options\CreateOrderOptions.cs" />
+    <Compile Include="Options\CreateProductOptions.cs" />
+    <Compile Include="Options\SearchCustomerOptions.cs" />
+    <Compile Include="Options\SearchOrderOptions.cs" />
+    <Compile Include="Options\SearchProductOptions.cs" />
+    <Compile Include="Services\CustomerService.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Services\ICustomerService.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Services\IOrderService.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Services\IProductService.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Services\OrderService.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Services\ProductService.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+  </ItemGroup>-->
+  <ItemGroup>
+    <None Include="TinyCRM.csproj" />
+  </ItemGroup>
 </Project>

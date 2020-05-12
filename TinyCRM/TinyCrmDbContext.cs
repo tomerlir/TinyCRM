@@ -1,7 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace TinyCRM
+namespace TinyCrm
 {
     public class TinyCrmDbContext : DbContext
     {
@@ -9,15 +11,32 @@ namespace TinyCRM
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer("Server = localhost; Database = tinycrm; User id = sa; Password = admin!@#123;");
+            optionsBuilder.UseSqlServer("Server=localhost;Database=tinycrm;User Id=sa;Password=admin!@#123;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
             modelBuilder
                 .Entity<Customer>()
-                .ToTable("Customer");   //Decide the name of the Customer table in the database
+                .ToTable("Customer");
+
+            modelBuilder
+                .Entity<Product>()
+                .ToTable("Product");
+
+            modelBuilder
+                .Entity<Order>()
+                .ToTable("Order");
+
+            modelBuilder
+                .Entity<OrderProduct>()
+                .ToTable("OrderProduct");
+
+            modelBuilder
+                .Entity<OrderProduct>()
+                .HasKey(op => new { op.ProductId, op.OrderId });
         }
     }
 }
